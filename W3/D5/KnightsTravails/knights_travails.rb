@@ -1,15 +1,35 @@
 require_relative "../PolyTreeNode/lib/00_tree_node.rb"
 
 class KnightPathFinder
+
   def build_move_tree(root_node)
     #When do we stop building the tree?
-    queue = new_move_positions(root_node)
-    until queue.empty?
-      queue.first 
-    end 
+    root_node = PolyTreeNode.new(root_node)
+    possible_moves = KnightPathFinder.valid_moves(root_node.value)
+    queue = [root_node]
+    possible_moves.each do |move|
+      queue.first.add_child(move)
+      queue << PolyTreeNode.new(move)
+      queue.last.parent = queue.first
+    end
+    @considered_positions = root_node.value + possible_moves
+    until queue.length == 64
+      i = 0
+      while i < queue.length
+        possible_moves = KnightPathFinder.valid_moves(queue[i])
+        possible_moves.each do |move|
+          if !@considered_positions.include?(move)
+            queue[i].add_child(move)
+            queue << PolyTreeNode.new(move)
+            queue.last.parent = queue[i]
+            @considered_positions << move
+          end
+        end
+        i += 1
+      end
+    end
+    queue
   end
-
-
 
   def initialize(starting_pos)
     @starting_pos = starting_pos
