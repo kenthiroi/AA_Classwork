@@ -35,15 +35,20 @@ class PolyTreeNode
     return self if self.value == target
     queue = Array.new
     queue.concat(self.children)
-    i = 0
-    while i < queue.length
+    i = -1 
+    while queue.length != 0
       while !queue[i].children.empty?
+        p target 
+        p queue[i].children
+        p "second loop #{queue[i]}"
+        sleep(1)
         queue << queue[i].children
-        queue[i].children.each do |ele|
-          return ele if target == ele.value
-        end
       end
-      i += 1
+        if target == queue[i].value 
+          return queue[i]
+        else
+          queue.pop
+        end
     end
     nil
   end
