@@ -59,4 +59,20 @@ class PolyTreeNode
 
     left or right 
   end
+
+  def bfs(target)
+    return self if self.value == target
+
+    queue = Array.new
+    queue.push(self.children.first)
+    queue.push(self.children.last)
+    until queue.empty?
+      return queue.first if queue.first.value == target
+      if queue.first.children
+        queue.concat(queue.first.children)
+      end
+      queue.shift
+    end
+    nil
+  end
 end
