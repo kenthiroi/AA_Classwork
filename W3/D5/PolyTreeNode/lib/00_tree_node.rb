@@ -33,18 +33,18 @@ class PolyTreeNode
 
   def dfs(target)
     return self if self.value == target
-
-    if self.children.length >= 1
-      # self.children.each do |node|
-      #   return node if node.value == target
-      # end
-      self.children.each do |node|
-        if node.dfs(target)
-          return node
+    queue = Array.new
+    queue.concat(self.children)
+    i = 0
+    while i < queue.length
+      while !queue[i].children.empty?
+        queue << queue[i].children
+        queue[i].children.each do |ele|
+          return ele if target == ele.value
         end
       end
-    else
-      return nil
+      i += 1
     end
+    nil
   end
 end
