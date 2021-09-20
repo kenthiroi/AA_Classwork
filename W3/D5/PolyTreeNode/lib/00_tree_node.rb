@@ -20,7 +20,8 @@ class PolyTreeNode
   end
 
   def add_child(child)
-   child.parent = self
+    #debugger
+    child.parent = self
   end
 
   def remove_child(child)
