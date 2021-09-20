@@ -31,25 +31,32 @@ class PolyTreeNode
     child.parent = nil
   end
 
+  # queue = Array.new
+  # queue.concat(self.children)
+  # i = 0
+  # while i < self.children.length - 1
+  #   # debugger
+  #   until queue[i].children.empty?
+  #     return queue[i] if queue[i].value == target
+  #     queue.unshift(queue[i].children)
+  #   end
+  #   queue[1].children.times do 
+  #     possible_target = queue.shift
+  #     if target == possible_target.value 
+  #       return possible_target
+  #     end
+  #   end
+  #   i += 1
+  # end
+  # nil
+
   def dfs(target)
     return self if self.value == target
-    queue = Array.new
-    queue.concat(self.children)
-    i = 0
-    while i < self.children.length - 1
-      # debugger
-      until queue[i].children.empty?
-        return queue[i] if queue[i].value == target
-        queue.unshift(queue[i].children)
-      end
-      queue[1].children.times do 
-        possible_target = queue.shift
-        if target == possible_target.value 
-          return possible_target
-        end
-      end
-      i += 1
-    end
-    nil
+    #debugger
+    
+    left = self.children[0].dfs(target) if self.children[0]
+    right = self.children[1].dfs(target) if self.children[1] && left.nil?
+
+    left or right 
   end
 end
