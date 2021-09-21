@@ -29,36 +29,6 @@ class KnightPathFinder
       i += 1
     end
 
-
-    # possible_moves = KnightPathFinder.valid_moves(root_node.value)
-    # queue = [root_node]
-    # @considered_positions << root_node.value
-    # possible_moves.each do |move|
-    #   # debugger
-    #   @considered_positions << move
-    #   move = PolyTreeNode.new(move)
-    #   queue.first.add_child(move)
-    #   queue << move
-    #   queue.last.parent = queue.first
-    # end
-    # until queue.length == 64
-    #   i = 0
-    #   while i < queue.length
-    #     #debugger if queue[i].value.class != [].class
-    #     possible_moves = KnightPathFinder.valid_moves(queue[i].value)
-    #     possible_moves.each do |move|
-    #       if !@considered_positions.include?(move)
-    #         move = PolyTreeNode.new(move)
-    #         queue[i].add_child(move)
-    #         queue << move 
-    #         queue.last.parent = queue[i]
-    #         @considered_positions << move.value
-    #       end
-    #     end
-    #     i += 1
-    #   end
-    # end
-    # queue
   end
 
   def initialize(starting_pos)
@@ -95,4 +65,16 @@ class KnightPathFinder
     valid_moves
   end
 
+  def find_path(end_pos)
+    @root_node.bfs(end_pos)
+  end
+
+  def trace_path_back(end_pos)
+    path_back = []
+    until end_pos.parent.nil?
+      path_back << end_pos.parent.value
+      path_back.concat(trace_path_back(end_pos.parent))
+    end
+    path_back
+  end
 end
