@@ -104,13 +104,18 @@ describe '#stock_picker' do
   context 'when given a correct array' do 
 
     it 'should return an array of days' do
-      expect(stock).to be(Array)
+      expect(stock.class).to eq(Array)
     end
 
     it 'should return correct order' do
       expect(stock).to eq([2, 5])
     end
 
+    it 'should not go back to previous days' do
+      expect(stock[0]).to be < stock[1]
+    end
+
   end
 
 end
+

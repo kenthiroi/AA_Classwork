@@ -1,4 +1,4 @@
-
+require 'byebug'
 
 def uniq(arr)
   raise ArgumentError if !arr.is_a?(Array)
@@ -46,4 +46,23 @@ def my_transpose(arr)
   end
 
   return transposed_arr
+end
+
+def stock_picker(arr)
+  i = 0
+  biggest_diff = 0
+  best_days = []
+  while i < arr.length - 1
+    j = i + 1
+    while j < arr.length
+      if arr[j] - arr[i] > biggest_diff
+        biggest_diff = arr[j] - arr[i]
+        best_days = [i, j]
+      end
+      j += 1
+    end
+    # debugger
+    i += 1
+  end
+  best_days
 end
