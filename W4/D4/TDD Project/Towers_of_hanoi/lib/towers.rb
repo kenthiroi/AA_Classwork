@@ -5,8 +5,7 @@ class TowersOfHanoi
   def initialize
     @stack1 = []
     @stack2 = []
-    @stack3 = []
-    @pieces = [1, 2, 3, 4, 5]
+    @stack3 = [5, 4, 3, 2, 1]
   end
 
 
