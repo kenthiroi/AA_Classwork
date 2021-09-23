@@ -27,3 +27,18 @@ def two_sum(arr)
   sum
 end
 
+def my_transpose(arr)
+  if !arr.is_a?(Array) || !arr[0].is_a?(Array)
+    raise ArgumentError
+  end
+  transposed_arr = []
+  i = 0
+  while i < arr[0].length
+    new_arr = []
+    arr.each do |row|
+      new_arr << row[i]
+    end
+    transposed_arr << new_arr
+  end
+  return transposed_arr
+end

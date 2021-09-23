@@ -46,6 +46,22 @@ describe '#my_transpose' do
     [3, 4, 5],
     [6, 7, 8]
   ]
+  rows2 = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [9, 10, 11]
+  ]
+  cols = [
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8]
+  ]
+  cols2 = [
+    [0, 3, 6, 9],
+    [1, 4, 7, 10],
+    [2, 5, 8, 11]
+  ]
 
   context 'when not an array or not square' do
 
@@ -54,10 +70,23 @@ describe '#my_transpose' do
     end
 
     it 'will raise error for non-array class args' do
-      
+      expect{my_transpose("string")}.to raise_error(ArgumentError)
+    end
+  end
+
+  context 'when transposing the array' do
+
+    it 'array length should equal length of inner array' do 
+      expect(my_transpose(rows2[0]).length).to eq(4)
+      expect(my_transpose(rows2).length).to eq(3)
     end
 
+    it 'should transpose array properly' do
+      expect(my_transpose(rows)).to eq(cols)
+      expect(my_transpose(rows2)).to eq(cols2)
+    end
   end
+
 
 
 end
