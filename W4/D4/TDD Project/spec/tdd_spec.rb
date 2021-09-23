@@ -65,7 +65,7 @@ describe '#my_transpose' do
 
   context 'when not an array or not square' do
 
-    it 'will raise error for non-square arrays' do
+    it 'will raise error for non-2D arrays' do
       expect{my_transpose([1,0])}.to raise_error(ArgumentError)
     end
 
@@ -77,7 +77,7 @@ describe '#my_transpose' do
   context 'when transposing the array' do
 
     it 'array length should equal length of inner array' do 
-      expect(my_transpose(rows2[0]).length).to eq(4)
+      expect(my_transpose(rows2)[0].length).to eq(4)
       expect(my_transpose(rows2).length).to eq(3)
     end
 
@@ -87,6 +87,30 @@ describe '#my_transpose' do
     end
   end
 
+end
 
+describe '#stock_picker' do
+
+  def element_checker(arr)
+    arr.each do |ele|
+      if !ele.is_a?(Integer) || !ele.is_a?(Float)
+        return false
+      end
+    end
+    true
+  end
+  stock_days = [7, 6, 1, 4, 3 ,6]
+  stock = stock_picker(stock_days)
+  context 'when given a correct array' do 
+
+    it 'should return an array of days' do
+      expect(stock).to be(Array)
+    end
+
+    it 'should return correct order' do
+      expect(stock).to eq([2, 5])
+    end
+
+  end
 
 end
