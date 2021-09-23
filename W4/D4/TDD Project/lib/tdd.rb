@@ -11,3 +11,19 @@ def uniq(arr)
   end
   return arr
 end
+
+def two_sum(arr)
+  raise ArgumentError if !arr.is_a?(Array)
+  sum = []
+  arr.each_with_index do |el1, i1|
+
+    arr.each_with_index do |el2, i2|
+      if i2 > i1 && el1 + el2 == 0
+        sum << [i1, i2]
+      end
+    end
+  end
+
+  sum
+end
+
