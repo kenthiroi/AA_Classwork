@@ -33,12 +33,28 @@
 # end
 
 def largest_contiguous_subsum(list)
-  largest_sum = 0
-  list.each_with_index do |num, i|
-    current_sum = list[i]
-    
+  largest_sum = list.first
+  current_sum = list.first
+  (1...list.length).each do |i| 
+    current_sum = 0 if current_sum < 0
+    current_sum += list[i]
+    largest_sum = current_sum if largest_sum < current_sum
   end
+  largest_sum
 end
 
+# Iterate through the array
+# Keep track of a current sum as we go
+# If we hit a negative number
+#   If it is more negative than our current sum
+#      Leave current sum as is
+#   If not more negative than current sum
+#      Add to current sum and store previous sum
+#   For the number after the negative, check to see if greater than last number stored in largest_sum
+
 list = [5, 3, -7]
-p largest_contiguous_subsum(list)
+p largest_contiguous_subsum(list) # => 8
+list = [2, 3, -6, 7, -6, 7]
+p largest_contiguous_subsum(list) # => 8 (from [7, -6, 7])
+list = [-5, -1, -3]
+p largest_contiguous_subsum(list) # => -1 (from [-1])
