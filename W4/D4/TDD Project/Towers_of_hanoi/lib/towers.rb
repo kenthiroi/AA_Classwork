@@ -14,5 +14,11 @@ class TowersOfHanoi
     stack2.push(stack1.pop) 
   end
 
+  def won?
+    if stack1[0] == stack1.length && stack2.empty? && stack3.empty?
+      return true
+    end
+    false
+  end
 
 end

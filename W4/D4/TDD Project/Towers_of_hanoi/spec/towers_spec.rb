@@ -55,4 +55,31 @@ describe "TowersOfHanoi" do
 
   end
 
+  describe '#won?' do
+  before(:each) do
+    tower.stack1 = [5, 4, 3, 2, 1]
+    tower.stack2 = []
+    tower.stack3 = []
+  end
+
+    it 'should return true if stack1 is complete' do
+      expect(tower.won?).to be(true)
+    end
+
+    it 'other stacks should be empty' do
+      expect(tower.stack2).to eq([])
+      expect(tower.stack3).to eq([])
+    end
+
+    before(:each) do
+      tower.stack1 = [5, 4, 3]
+      tower.stack2 = [2, 1]
+      tower.stack3 = []
+    end
+
+    it 'should return false when not complete' do
+      expect(tower.won?).to be(false)
+    end
+  end
+
 end
