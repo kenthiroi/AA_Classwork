@@ -71,13 +71,8 @@ describe "TowersOfHanoi" do
       expect(tower.stack3).to eq([])
     end
 
-    before(:each) do
-      tower.stack1 = [5, 4, 3]
-      tower.stack2 = [2, 1]
-      tower.stack3 = []
-    end
-
     it 'should return false when not complete' do
+      tower.move(tower.stack1, tower.stack2)
       expect(tower.won?).to be(false)
     end
   end
