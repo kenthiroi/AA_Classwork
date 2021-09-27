@@ -4,6 +4,9 @@ end
 
 class Array
   def hash
+    sum = 0
+    self.each_with_index { |n, i| sum += (i * n).hash }
+    sum
   end
 end
 
