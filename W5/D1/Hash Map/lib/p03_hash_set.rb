@@ -7,9 +7,13 @@ class HashSet
   end
 
   def insert(key)
+    hash_value = key.hash
+    @store[hash_value % @store.length] << key
   end
 
   def include?(key)
+    hash_value = key.hash
+    @store[hash_value % @store.length].include?(key)
   end
 
   def remove(key)
