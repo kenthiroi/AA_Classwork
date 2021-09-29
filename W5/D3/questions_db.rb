@@ -72,7 +72,16 @@ class Users
       FROM
         questions
       WHERE
-        author_id = ?
+        (
+          SELECT
+            COUNT(DISTINCT(questions.id)) 
+          FROM
+            questions
+            LEFT OUTER JOIN question_likes
+            ON questions.id = question_likes.question_id
+          WHERE
+
+        )
     SQL
     Questions.new(question.first)
   end
