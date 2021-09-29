@@ -12,11 +12,12 @@ include Singleton
 end
 
 class Users
+  attr_accessor :fname, :lname, :id
 
-  # def self.all
-  #   users = QuestionsDatabase.instance.execute('SELECT * FROM users')
-  #   users.map { |datum| Users.new(datum) }
-  # end
+  def self.all
+    users = QuestionsDatabase.instance.execute('SELECT * FROM users')
+    users.map { |datum| Users.new(datum) }
+  end
 
   def self.find_by_id(id)
     user = QuestionsDatabase.instance.execute(<<-SQL, id)
@@ -27,8 +28,7 @@ class Users
       WHERE
         id = ?
     SQL
-
-    
+    Users.new(user.first)
   end
 
   def self.find_by_name(fname, lname)
@@ -40,11 +40,47 @@ class Users
       WHERE
         fname = ? OR lname = ?
     SQL
+    Users.new(user.first)
+  end
+
+  def initialize(hash)
+    @fname = hash['fname']
+    @lname = hash['lname']
+    @id = hash['id']
   end
 
 end
 
-p Users.all
+class Questions
+  attr_accessor :title, :body, :author_id, :id
 
-p Users.find_by_id(1)
-p Users.find_by_id(2)
+  def self.find_by_author_id(author_id)
+    question = QuestionsDatabase.instance.execute(<<-SQL, author_id)
+      SELECT 
+        * 
+      FROM
+        questions
+      WHERE
+        author_id = ?
+    SQL
+    Questions.new(question.first)
+  end
+
+  def initialize(hash)
+    @title = hash['title']
+    @body = hash['body']
+    @author_id = hash['author_id']
+    @id = hash['id']
+  end
+  
+end
+
+class QuestionsFollow
+
+  def initialize(hash)
+    @id = hash['id']
+    @user_id = hash['user_id']
+    @question_id = hash['question_id']
+  end
+  
+end
