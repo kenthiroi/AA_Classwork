@@ -49,6 +49,14 @@ class Users
     @id = hash['id']
   end
 
+  def authored_questions
+    Questions.find_by_author_id(id)
+  end
+
+  def authored_replies
+    Replies.find_by_user_id(id)
+  end
+
 end
 
 class Questions
@@ -73,9 +81,82 @@ class Questions
     @id = hash['id']
   end
   
+  def author
+    Users.find_by_id(author_id)
+  end
+
+  def replies
+    Replies.find_by_question_id(id)
+  end
+
+end
+
+class Replies
+  attr_accessor :id, :question_id, :user_id, :body, :parent_id
+
+  def self.find_by_user_id(user_id)
+    user = QuestionsDatabase.instance.execute(<<-SQL, user_id)
+      SELECT 
+        * 
+      FROM
+        replies
+      WHERE
+        user_id = ?
+    SQL
+    Replies.new(user.first)
+  end
+
+  def self.find_by_question_id(question_id)
+    question = QuestionsDatabase.instance.execute(<<-SQL, question_id)
+      SELECT 
+        * 
+      FROM
+        replies
+      WHERE
+        question_id = ?
+    SQL
+    Replies.new(question.first)
+  end
+
+  def initialize(hash)
+    @id = hash['id']
+    @question_id = hash['question_id']
+    @user_id = hash['user_id']
+    @body = hash['body']
+    @parent_id = hash['parent_id']
+  end
+
+  def author
+    User.find_by_id(author_id)
+  end
+
+  def question
+    Question.find_by_question_id(question_id)
+  end
+
+  def parent_reply
+    Replies.find_by_user_id(parent_id)
+  end
+
+  def child_reply
+    Replies.find_by_user_id(parent_reply)
+  end
+
+end
+
+class QuestionLikes
+  attr_accessor :id, :user_id, :question_id
+
+  def initialize(hash)
+    @id = hash['id']
+    @user_id = hash['user_id']
+    @question_id = hash['question_id']
+  end
+
 end
 
 class QuestionsFollow
+  attr_accessor :id, :user_id, :question_id
 
   def initialize(hash)
     @id = hash['id']
