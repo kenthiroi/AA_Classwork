@@ -1,10 +1,10 @@
 PRAGMA foreign_keys = ON;
 
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS questions;
 DROP TABLE IF EXISTS questions_follow;
 DROP TABLE IF EXISTS replies;
 DROP TABLE IF EXISTS question_likes;
+DROP TABLE IF EXISTS questions;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE users(
   fname TEXT NOT NULL,
