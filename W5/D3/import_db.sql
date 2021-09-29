@@ -52,14 +52,15 @@ INSERT INTO
   users(fname, lname)
 VALUES
   ('Kent', 'Hiroi'), 
-  ('Emmett', 'He');
-
+  ('Emmett', 'He'),
+  ('andy', 'huang');
 INSERT INTO
   questions(title, body, author_id)
 VALUES 
   ('Kent Question', 'Kent Kent Kent', 1),
-  ('Emmett Question', 'Emmett Emmett Emmett', 2);
-
+  ('Emmett Question', 'Emmett Emmett Emmett', 2),
+  ('Andy Question', 'ANDY ANDY ANDY', 2),
+  ('random', 'random random', 2);
 INSERT INTO 
   question_follows(user_id, question_id)
 VALUES
@@ -70,7 +71,11 @@ INSERT INTO
   question_likes(user_id, question_id)
 VALUES
   (1, 2),
-  (2, 1);
+  (2, 1),
+  (1, 1),
+  (3, 1),
+  (2, 4),
+  (1, 4);
 
 INSERT INTO
   replies(question_id, user_id, parent_id, body)
