@@ -78,6 +78,10 @@ class Questions
     Questions.new(question.first)
   end
 
+  def self.most_followed(n)
+    QuestionFollow.most_followed_questions(n)
+  end
+  
   def initialize(hash)
     @title = hash['title']
     @body = hash['body']
@@ -152,8 +156,12 @@ class Replies
 
 end
 
-class QuestionLikes
+class QuestionLike
   attr_accessor :id, :user_id, :question_id
+
+  def self.likers_for_question_id(question_id)
+
+  end
 
   def initialize(hash)
     @id = hash['id']
@@ -192,6 +200,25 @@ class QuestionFollow
         question_id = ?
     SQL
     questions.map { |question| Questions.new(question)}
+  end
+
+  def self.most_followed_questions(n)
+    questions = QuestionsDatabase.instance.execute(<<-SQL, n)
+      SELECT 
+        title 
+      FROM
+        question_follows
+        JOIN questions
+          ON question_follows.user_id = questions.id
+      GROUP BY
+        questions.id
+      ORDER BY
+        COUNT(*) DESC
+      LIMIT
+        ?
+    SQL
+
+    questions.map { |question| Questions.new(question) }
   end
 
   def initialize(hash)
