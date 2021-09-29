@@ -24,4 +24,4 @@ CREATE TABLE questions_follow(
   question_id integer NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (question_id) REFERENCES questions(id)
-);
+);`
