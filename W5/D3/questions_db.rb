@@ -57,6 +57,10 @@ class Users
     Replies.find_by_user_id(id)
   end
 
+  def followed_questions
+    QuestionFollow.followed_questions_for_user_id(id)
+  end
+
 end
 
 class Questions
@@ -87,6 +91,10 @@ class Questions
 
   def replies
     Replies.find_by_question_id(id)
+  end
+  
+  def followers
+    QuestionFollow.followers_for_question_id(id)
   end
 
 end
@@ -155,8 +163,36 @@ class QuestionLikes
 
 end
 
-class QuestionsFollow
+class QuestionFollow
   attr_accessor :id, :user_id, :question_id
+
+  def self.followers_for_question_id(question_id)
+    followers = QuestionsDatabase.instance.execute(<<-SQL, question_id)
+      SELECT 
+        * 
+      FROM
+        question_follows
+        JOIN users
+          ON question_follows.user_id = users.id
+      WHERE
+        question_id = ?
+    SQL
+    followers.map { |follower| Users.new(follower)}
+  end
+
+  def self.followed_questions_for_user_id(question_id)
+    questions = QuestionsDatabase.instance.execute(<<-SQL, question_id)
+      SELECT 
+        * 
+      FROM
+        question_follows
+        JOIN questions
+          ON question_follows.user_id = questions.id
+      WHERE
+        question_id = ?
+    SQL
+    questions.map { |question| Questions.new(question)}
+  end
 
   def initialize(hash)
     @id = hash['id']
@@ -165,3 +201,4 @@ class QuestionsFollow
   end
   
 end
+

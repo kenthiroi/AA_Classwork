@@ -1,6 +1,6 @@
 PRAGMA foreign_keys = ON;
 
-DROP TABLE IF EXISTS questions_follow;
+DROP TABLE IF EXISTS question_follows;
 DROP TABLE IF EXISTS replies;
 DROP TABLE IF EXISTS question_likes;
 DROP TABLE IF EXISTS questions;
@@ -21,7 +21,7 @@ CREATE TABLE questions(
   FOREIGN KEY (author_id) REFERENCES users(id)
 );
 
-CREATE TABLE questions_follow(
+CREATE TABLE question_follows(
   id INTEGER PRIMARY KEY,
   user_id INTEGER NOT NULL,
   question_id INTEGER NOT NULL,
@@ -61,7 +61,7 @@ VALUES
   ('Emmett Question', 'Emmett Emmett Emmett', 2);
 
 INSERT INTO 
-  questions_follow(user_id, question_id)
+  question_follows(user_id, question_id)
 VALUES
   (1, 1),
   (2, 2);
