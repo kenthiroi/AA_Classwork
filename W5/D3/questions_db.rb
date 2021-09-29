@@ -61,6 +61,10 @@ class Users
     QuestionFollow.followed_questions_for_user_id(id)
   end
 
+  def liked_question
+    QuestionLike.liked_questions_for_user_id(id)
+  end
+
 end
 
 class Questions
@@ -99,6 +103,14 @@ class Questions
   
   def followers
     QuestionFollow.followers_for_question_id(id)
+  end
+
+  def likers
+    QuestionLike.likers_for_question_id(id)
+  end
+
+  def num_likes
+    QuestionLike.num_likes_for_question_id(id)
   end
 
 end
@@ -189,19 +201,38 @@ class QuestionLike
 
   def self.liked_questions_for_user_id(user_id)
     likers = QuestionsDatabase.instance.execute(<<-SQL, user_id)
-    SELECT 
-      * 
-    FROM
-      users
+      SELECT 
+        * 
+      FROM
+        users
       JOIN question_likes
         ON users.id = question_likes.user_id
+      JOIN questions
+        ON question_likes.question_id = questions.id
+      WHERE
+        user_id = ?
+    SQL
+
+    likers.map { |question| Questions.new(question) }
+  end
+
+  def self.most_liked_question(n)
+    questions = QuestionsDatabase.instance.execute(<<-SQL, n)
+      SELECT 
+        * 
+      FROM
+        question_likes
         JOIN questions
           ON question_likes.question_id = questions.id
-    WHERE
-      question_id = ?
-  SQL
+      GROUP BY
+        questions.id
+      ORDER BY
+        COUNT(*) DESC
+      LIMIT
+        ?
+    SQL
 
-  likers.map { |question| Questions.new(question) }
+    questions.map { |question| Questions.new(question) }
   end
 
   def initialize(hash)
