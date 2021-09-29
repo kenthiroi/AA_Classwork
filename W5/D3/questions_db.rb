@@ -160,7 +160,48 @@ class QuestionLike
   attr_accessor :id, :user_id, :question_id
 
   def self.likers_for_question_id(question_id)
+    likers = QuestionsDatabase.instance.execute(<<-SQL, question_id)
+      SELECT 
+        * 
+      FROM
+        question_likes
+        JOIN users
+          ON question_likes.user_id = users.id
+      WHERE
+        question_id = ?
+    SQL
 
+    likers.map { |user| Users.new(user) }
+  end
+
+  def self.num_likes_for_question_id(question_id)
+    likers = QuestionsDatabase.instance.execute(<<-SQL, question_id)
+      SELECT 
+        COUNT(*) 
+      FROM
+        question_likes
+      WHERE
+        question_id = ?
+    SQL
+
+    likers.first['COUNT(*)']
+  end
+
+  def self.liked_questions_for_user_id(user_id)
+    likers = QuestionsDatabase.instance.execute(<<-SQL, user_id)
+    SELECT 
+      * 
+    FROM
+      users
+      JOIN question_likes
+        ON users.id = question_likes.user_id
+        JOIN questions
+          ON question_likes.question_id = questions.id
+    WHERE
+      question_id = ?
+  SQL
+
+  likers.map { |question| Questions.new(question) }
   end
 
   def initialize(hash)
