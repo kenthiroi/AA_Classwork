@@ -65,6 +65,18 @@ class Users
     QuestionLike.liked_questions_for_user_id(id)
   end
 
+  def average_karma
+    question = QuestionsDatabase.instance.execute(<<-SQL, id)
+      SELECT 
+        * 
+      FROM
+        questions
+      WHERE
+        author_id = ?
+    SQL
+    Questions.new(question.first)
+  end
+
 end
 
 class Questions
@@ -84,6 +96,25 @@ class Questions
 
   def self.most_followed(n)
     QuestionFollow.most_followed_questions(n)
+  end
+
+  def self.most_liked(n)
+    questions = QuestionsDatabase.instance.execute(<<-SQL, n)
+      SELECT 
+        * 
+      FROM
+        question_likes
+        JOIN questions
+          ON question_likes.question_id = questions.id
+      GROUP BY
+        questions.id
+      ORDER BY
+        COUNT(*) DESC
+      LIMIT
+        ?
+    SQL
+
+    questions.map { |question| Questions.new(question) }
   end
   
   def initialize(hash)
