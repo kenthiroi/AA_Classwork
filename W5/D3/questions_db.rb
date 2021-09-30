@@ -80,6 +80,26 @@ class Users
     nums['num_likes'] / nums['num_questions']
   end
 
+  def save
+    if id
+      QuestionsDatabase.instance.execute(<<-SQL, fname, lname, id)
+      UPDATE
+        users
+      SET
+        fname = ?, lname = ?
+      WHERE
+        id = ?
+      SQL
+    else
+      QuestionsDatabase.instance.execute(<<-SQL, fname, lname)
+      INSERT INTO
+        users(fname, lname)
+      VALUES
+        (?,?)
+      SQL
+    end
+  end
+
 end
 
 class Questions
