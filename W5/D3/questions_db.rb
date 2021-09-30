@@ -97,6 +97,7 @@ class Users
       VALUES
         (?,?)
       SQL
+      id = QuestionsDatabase.instance.last_insert_row_id
     end
   end
 
@@ -145,6 +146,27 @@ class Questions
     @body = hash['body']
     @author_id = hash['author_id']
     @id = hash['id']
+  end
+
+  def save
+    if id
+      QuestionsDatabase.instance.execute(<<-SQL, title, body, author_id, id)
+      UPDATE
+        questions
+      SET
+        title = ?, body = ?, author_id = ?
+      WHERE
+        id = ?
+      SQL
+    else
+      QuestionsDatabase.instance.execute(<<-SQL, title, body, author_id)
+      INSERT INTO
+        questions(title, body, author_id)
+      VALUES
+        (?,?,?)
+      SQL
+      id = QuestionsDatabase.instance.last_insert_row_id
+    end
   end
   
   def author
@@ -202,6 +224,27 @@ class Replies
     @user_id = hash['user_id']
     @body = hash['body']
     @parent_id = hash['parent_id']
+  end
+
+  def save
+    if id
+      QuestionsDatabase.instance.execute(<<-SQL, question_id, user_id, body, parent_id, id)
+      UPDATE
+        replies
+      SET
+        question_id = ?, user_id = ?, body = ?, parent_id = ?
+      WHERE
+        id = ?
+      SQL
+    else
+      QuestionsDatabase.instance.execute(<<-SQL, question_id, user_id, body, parent_id)
+      INSERT INTO
+        replies(question_id, user_id, body, parent_id)
+      VALUES
+        (?,?,?,?)
+      SQL
+      id = QuestionsDatabase.instance.last_insert_row_id
+    end
   end
 
   def author
