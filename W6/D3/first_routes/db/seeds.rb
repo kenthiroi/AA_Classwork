@@ -6,8 +6,17 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.destroy_all
+Artwork.destroy_all
+
 User.create([
-  { name: 'Kent Hiroi', email: 'kento@kentobento.com' }, 
-  { name: 'Abraham Fong', email: 'abraham@abraham.com' }, 
-  { name: 'Bob Burgerman', email: 'bob@burgermeister.com'}
+  { username: 'Kento' },
+  { username: 'Abrabra' },
+  { username: 'Sea Drake' } 
+])
+
+Artwork.create([
+  { artist_id: 1, title: 'Ooga booga', image_url: 'fgjehhnx'},
+  { artist_id: 2, title: 'Untitled', image_url: 'tdhjgdne' },
+  { artist_id: 3, title: 'Gigguhs in the chat', image_url: 'et3hjg4r' }
 ])
