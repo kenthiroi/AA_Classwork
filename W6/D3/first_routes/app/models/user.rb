@@ -16,5 +16,5 @@ class User < ApplicationRecord
 
   has_many :shared_artworks,
     through: :artworks,
-    source: :
+    source: :shared_viewers
 end
