@@ -20,3 +20,12 @@ Artwork.create([
   { artist_id: 2, title: 'Untitled', image_url: 'tdhjgdne' },
   { artist_id: 3, title: 'Gigguhs in the chat', image_url: 'et3hjg4r' }
 ])
+
+ArtworkShare.create([
+  { artwork_id: 1, viewer_id: 3 },
+  { artwork_id: 1, viewer_id: 2 },
+  { artwork_id: 2, viewer_id: 1 },
+  { artwork_id: 2, viewer_id: 3 },
+  { artwork_id: 3, viewer_id: 1 },
+  { artwork_id: 3, viewer_id: 2 }
+])
