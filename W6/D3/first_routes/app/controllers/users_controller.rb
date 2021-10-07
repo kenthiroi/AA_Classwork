@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    render json: params
+    render json: User.find(params[:id])
   end
 
   def create
