@@ -9,7 +9,15 @@ Rails.application.routes.draw do
   patch '/users/:id', to: 'users#update', as: 'patch_user'
   put '/users/:id', to: 'users#update', as: 'put_user'
   delete '/users/:id', to: 'users#destroy', as: 'delete_user'
+  
+  resources :users do
+    # get '/users/:user_id/artworks', to: 'artwork#index'
+    resources :artwork, only: :index
+  end
 
-  #Artwork routes
-  resources :artworks
+  # Artworks
+  resources :artworks, except: [:index, :new, :edit]
+
+  #Artwork shares routes
+  resources :artwork_shares, only: [:create, :destroy]
 end
