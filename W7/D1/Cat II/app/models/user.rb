@@ -1,3 +1,4 @@
+# require 'bcrypt'
 # == Schema Information
 #
 # Table name: users
@@ -28,12 +29,13 @@ class User < ApplicationRecord
   end
 
   def password=(password)
-    self.password_digest = BCrpyt::Password.create(password)
+ 
+    self.password_digest = BCrypt::Password.create(password)
     @password = password
   end
 
   def is_password?(password)
-    password_object = BCrpyt::Password.new(self.password_digest)
+    password_object = BCrypt::Password.new(self.password_digest)
     password_object.is_password?(password)
   end
 
