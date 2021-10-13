@@ -1,0 +1,14 @@
+<% action_url = users_url %>
+<% button_text = "CREATE USER" %>
+
+<form action="<%= action_url %>" method="POST">
+<%= auth_token %>
+
+<label for="email">Email</label>
+<input id="email" type="text" name="user[email]" value="" />
+<br/>
+<label for="password">Password</label>
+<input type="password" id="password" name="user[password]" value=""/>
+<br>
+<input type="submit" value="<%= button_text %>" />
+</form>

@@ -5,9 +5,12 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by_credentials(params[:user][:email], params[:user][:password])
-    if @user 
-      login(@user)
+    @user = User.find_by_credentials(
+      params[:user][:email], 
+      params[:user][:password]
+    )
+    if @user
+      log_in_user!(@user)
       redirect_to users_url
     else
       render :new
@@ -15,8 +18,12 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    logout
+    logout_user!
     redirect_to new_session_url
+  end
+
+  def new
+    render :new
   end
 
 end

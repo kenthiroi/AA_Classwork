@@ -10,8 +10,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def new
+    @user = User.new
+    render :new
+  end
+
+  def show
+    
+  end
+
   def user_params
     params.require(:user).permit(:email, :password)
   end
-  
+
 end

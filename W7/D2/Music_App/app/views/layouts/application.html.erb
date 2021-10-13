@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>MusicApp</title>
+    <link href="styles.css" rel="stylesheet">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +11,17 @@
   </head>
 
   <body>
+    <nav>
+    <h1>Music App</h1>
+    <h1 display="flex">
+      <% if current_user.nil? %>
+        <a href="<%= new_session_url %>">Sign in</a>
+        <a href="<%= new_user_url %>">Sign up</a>
+      <% else %>
+        <%= current_user.email %>
+      <% end %>
+    </h1>
+    </nav>
     <%= yield %>
   </body>
 </html>
