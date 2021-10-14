@@ -24,6 +24,14 @@
 		color: $dark-gray;
 	}
 
+	a:hover {
+		text-decoration: underline;
+	}
+
+	li:first-child {
+		font-weight: bold;
+	}
+
 	ul {
 		display: flex;
 	}
@@ -46,6 +54,11 @@
 		border-right: 1px solid $light-gray;
 	}
 
+	li:last-child {
+		margin-left: 10px;
+		border-right: 0px solid $light-gray;
+	}
+
 	button {
 		background: none;
 		padding: 0px;
@@ -62,6 +75,16 @@
 	button, 
 	time {
 		margin-right: 10px;
+	}
+
+	li:nth-child(2):hover,
+	li:nth-child(3):hover {
+		text-decoration: underline;
+	}
+
+	li:nth-child(4):hover,
+	li:nth-child(5):hover {
+		color: gray;
 	}
 
 	i {
