@@ -9,8 +9,9 @@ span, article, footer, time, small {
 }
 
 ul { 
-  -webkit-appearance: none;
+  list-style: none;
 }
+
 
 img {
   display: block;
