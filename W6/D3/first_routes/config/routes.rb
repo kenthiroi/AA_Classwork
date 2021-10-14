@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   
   resources :users do
     # get '/users/:user_id/artworks', to: 'artwork#index'
-    resources :artwork, only: :index
+    resources :artworks, only: :index
   end
 
   # Artworks

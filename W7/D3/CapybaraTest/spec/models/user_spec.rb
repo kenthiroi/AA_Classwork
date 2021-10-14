@@ -23,17 +23,27 @@ RSpec.describe User, type: :model do
   # feature "find by credentials" do 
     
   # end
+  feature "uniqueness" do
+    before :each do
+      FactoryBot.create(:user)
+    end
+
+    it { should validate_uniqueness_of(:username) }
+    it { should validate_uniqueness_of(:session_token) }
+  end
 
   feature "is_valid_password?" do
-    scenario "with a valid password" do
-      it "should return true" do 
+    let!(:user) { FactoryBot.create(:user) }
+    context "with a valid password" do
+      scenario "should return true" do 
         expect(user.is_valid_password?('password')).to be true 
       end
     end 
-    scenario "with an invalid password" do
-      it "should return false" do 
+    context "with an invalid password" do
+      scenario "should return false" do 
         expect(user.is_valid_password?('123456')).to be false
       end
     end 
   end
+
 end
