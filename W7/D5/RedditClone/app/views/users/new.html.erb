@@ -1,6 +1,6 @@
-<h1>Login</h1>
+<h1>New User!</h1>
 
-<form action="<%= session_url %>" method="POST">
+<form action="<%= users_url %>" method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
   <label>
     Username: 
@@ -12,11 +12,9 @@
     <input type="password" name="user[password]" value="">
   </label>
   <br>
-  <input type="submit" value="Login">
+  <input type="submit" value="Create User">
 </form>
 
 <% if flash[:errors] %>
   <p><%= flash[:errors] %></p>
 <% end %>
-
-<a href="<%= new_user_url %>">Sign Up!</a>
