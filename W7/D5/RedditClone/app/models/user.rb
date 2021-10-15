@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  before_validations :ensure_session_token
+  before_validation :ensure_session_token
 
   attr_reader :password
 
