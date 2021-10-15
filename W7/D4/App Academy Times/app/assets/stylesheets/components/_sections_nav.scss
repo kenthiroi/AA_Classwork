@@ -1,0 +1,19 @@
+.section-links {
+  font-family: $sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  border-bottom: 1px solid lightgrey;
+  li {
+    margin: 0 10px;
+  }
+  
+  li:hover{
+    background-color: lightgrey;
+  }
+  
+  li:last-child:hover{
+    background-color: transparent;
+    text-decoration: underline;
+  }
+}
