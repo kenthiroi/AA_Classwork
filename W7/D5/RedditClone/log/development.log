@@ -694,3 +694,366 @@ Processing by SubsController#new as HTML
 Completed 200 OK in 16ms (Views: 10.4ms | ActiveRecord: 1.4ms)
 
 
+Started GET "/subs" for ::1 at 2021-10-15 16:50:12 -0700
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/khiroi/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+Processing by SubsController#index as HTML
+  Rendering subs/index.html.erb within layouts/application
+  [1m[36mSub Load (1.7ms)[0m  [1m[34mSELECT "subs".* FROM "subs"[0m
+  ↳ app/views/subs/index.html.erb:4
+  Rendered subs/index.html.erb within layouts/application (8.5ms)
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+Completed 200 OK in 197ms (Views: 144.0ms | ActiveRecord: 46.4ms)
+
+
+Started GET "/session/new" for ::1 at 2021-10-15 16:50:14 -0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (0.5ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+Completed 200 OK in 33ms (Views: 15.5ms | ActiveRecord: 13.7ms)
+
+
+Started GET "/session/new" for ::1 at 2021-10-15 16:50:14 -0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (0.5ms)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+Completed 200 OK in 15ms (Views: 13.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/users/new" for ::1 at 2021-10-15 16:50:21 -0700
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (1.4ms)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+Completed 200 OK in 45ms (Views: 27.2ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/users" for ::1 at 2021-10-15 16:50:27 -0700
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"VWKSmoX7eIi9BR7pGXhOFMrqZUrivPGIM2E34p4wwN5ZH0G1bAvqtLb1G47bFamQO+/JfMRqt4H5btrvR7TCUw==", "user"=>{"username"=>"kentokento", "password"=>"[FILTERED]"}}
+  [1m[35m (1.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:11
+  [1m[36mUser Exists (3.7ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "kentokento"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:11
+  [1m[36mUser Create (3.6ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "kentokento"], ["password_digest", "$2a$12$PrxJlALaQ5hDgKInflop7.V7P60t7XiC3XgK/t0/O6Uh4XRJ3gedW"], ["session_token", "Zgxbv3tuShBFb5KDKzsEPA"], ["created_at", "2021-10-15 23:50:27.637877"], ["updated_at", "2021-10-15 23:50:27.637877"]]
+  ↳ app/controllers/users_controller.rb:11
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:11
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:34
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["username", "kentokento"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:34
+  [1m[36mUser Update (0.6ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["updated_at", "2021-10-15 23:50:27.644210"], ["id", 1]]
+  ↳ app/models/user.rb:34
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:34
+Redirected to http://localhost:3000/subs
+Completed 302 Found in 295ms (ActiveRecord: 11.3ms)
+
+
+Started GET "/subs" for ::1 at 2021-10-15 16:50:27 -0700
+Processing by SubsController#index as HTML
+  Rendering subs/index.html.erb within layouts/application
+  [1m[36mSub Load (1.5ms)[0m  [1m[34mSELECT "subs".* FROM "subs"[0m
+  ↳ app/views/subs/index.html.erb:4
+  Rendered subs/index.html.erb within layouts/application (2.3ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+Completed 200 OK in 20ms (Views: 16.7ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/subs/new" for ::1 at 2021-10-15 16:50:30 -0700
+Processing by SubsController#new as HTML
+  [1m[36mUser Load (3.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+  Rendering subs/new.html.erb within layouts/application
+  Rendered subs/new.html.erb within layouts/application (130.7ms)
+Completed 500 Internal Server Error in 156ms (ActiveRecord: 11.7ms)
+
+
+
+NameError - undefined local variable or method `users_subs_url' for #<#<Class:0x00007ff78bfa73e8>:0x00007ff7ad4c3770>
+Did you mean?  user_subs_url:
+  app/views/subs/new.html.erb:3:in `_app_views_subs_new_html_erb__1228503141521145255_70350870549020'
+  app/controllers/subs_controller.rb:8:in `new'
+
+Started POST "/__better_errors/387e3d698a643115/variables" for ::1 at 2021-10-15 16:50:30 -0700
+Started GET "/subs" for ::1 at 2021-10-15 16:50:41 -0700
+Processing by SubsController#index as HTML
+  Rendering subs/index.html.erb within layouts/application
+  [1m[36mSub Load (0.9ms)[0m  [1m[34mSELECT "subs".* FROM "subs"[0m
+  ↳ app/views/subs/index.html.erb:4
+  Rendered subs/index.html.erb within layouts/application (1.8ms)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+Completed 200 OK in 21ms (Views: 18.6ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/subs" for ::1 at 2021-10-15 16:50:43 -0700
+Processing by SubsController#index as HTML
+  Rendering subs/index.html.erb within layouts/application
+  [1m[36mSub Load (0.8ms)[0m  [1m[34mSELECT "subs".* FROM "subs"[0m
+  ↳ app/views/subs/index.html.erb:4
+  Rendered subs/index.html.erb within layouts/application (1.5ms)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+Completed 200 OK in 19ms (Views: 17.1ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/subs/new" for ::1 at 2021-10-15 16:51:57 -0700
+Processing by SubsController#new as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+  Rendering subs/new.html.erb within layouts/application
+  Rendered subs/new.html.erb within layouts/application (218.7ms)
+Completed 500 Internal Server Error in 247ms (ActiveRecord: 1.1ms)
+
+
+
+NameError - undefined local variable or method `sub' for #<#<Class:0x00007ff78bfa73e8>:0x00007ff7acf9db60>
+Did you mean?  @sub:
+  app/views/subs/new.html.erb:3:in `_app_views_subs_new_html_erb__1228503141521145255_70350867838260'
+  app/controllers/subs_controller.rb:8:in `new'
+
+Started POST "/__better_errors/b6db122b17bbc3fe/variables" for ::1 at 2021-10-15 16:51:57 -0700
+Started POST "/__better_errors/b6db122b17bbc3fe/variables" for ::1 at 2021-10-15 16:52:05 -0700
+Started GET "/subs" for ::1 at 2021-10-15 16:52:12 -0700
+Processing by SubsController#index as HTML
+  Rendering subs/index.html.erb within layouts/application
+  [1m[36mSub Load (0.6ms)[0m  [1m[34mSELECT "subs".* FROM "subs"[0m
+  ↳ app/views/subs/index.html.erb:4
+  Rendered subs/index.html.erb within layouts/application (1.4ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+Completed 200 OK in 26ms (Views: 24.3ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/subs/new" for ::1 at 2021-10-15 16:52:13 -0700
+Processing by SubsController#new as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+  Rendering subs/new.html.erb within layouts/application
+  Rendered subs/new.html.erb within layouts/application (10.3ms)
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 0.8ms)
+
+
+
+NoMethodError - undefined method `user' for #<Sub:0x00007ff77bb92600>:
+  app/views/subs/new.html.erb:3:in `_app_views_subs_new_html_erb__1228503141521145255_70350454687140'
+  app/controllers/subs_controller.rb:8:in `new'
+
+Started POST "/__better_errors/4d3e71348b70f584/variables" for ::1 at 2021-10-15 16:52:13 -0700
+Started GET "/subs/new" for ::1 at 2021-10-15 16:52:31 -0700
+Processing by SubsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+  Rendering subs/new.html.erb within layouts/application
+  Rendered subs/new.html.erb within layouts/application (3.8ms)
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.5ms)
+
+
+
+ActionController::UrlGenerationError - No route matches {:action=>"create", :controller=>"subs", :user_id=>nil}, missing required keys: [:user_id]:
+  app/views/subs/new.html.erb:3:in `_app_views_subs_new_html_erb__1228503141521145255_70350455082740'
+  app/controllers/subs_controller.rb:8:in `new'
+
+Started POST "/__better_errors/dfa93942a3c3e0c8/variables" for ::1 at 2021-10-15 16:52:31 -0700
+Started GET "/subs/new" for ::1 at 2021-10-15 16:52:45 -0700
+Processing by SubsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+  Rendering subs/new.html.erb within layouts/application
+  Rendered subs/new.html.erb within layouts/application (21.0ms)
+Completed 500 Internal Server Error in 28ms (ActiveRecord: 0.3ms)
+
+
+
+ActionController::UrlGenerationError - No route matches {:action=>"create", :controller=>"subs", :user_id=>nil}, missing required keys: [:user_id]:
+  app/views/subs/new.html.erb:3:in `_app_views_subs_new_html_erb__1228503141521145255_70350869601580'
+  app/controllers/subs_controller.rb:8:in `new'
+
+Started POST "/__better_errors/7ed1d80e02441386/variables" for ::1 at 2021-10-15 16:52:45 -0700
+Started POST "/users" for ::1 at 2021-10-15 16:52:54 -0700
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"AJqJi8Dz+6NfK5/eoJrQzOdavsQUtXGobTQBXH4KhG4M51qkKQNpn1Tbmrli9zdIFl8S8jJjN6GnO+xRp46G4w==", "user"=>{"username"=>"kentokento", "password"=>"[FILTERED]"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:11
+  [1m[36mUser Exists (1.7ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "kentokento"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:11
+  [1m[35m (0.9ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:11
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.3ms)
+  [1m[36mUser Load (7.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+Completed 200 OK in 316ms (Views: 11.8ms | ActiveRecord: 10.3ms)
+
+
+Started GET "/subs/new" for ::1 at 2021-10-15 16:52:56 -0700
+Processing by SubsController#new as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+  Rendering subs/new.html.erb within layouts/application
+  Rendered subs/new.html.erb within layouts/application (3.0ms)
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.7ms)
+
+
+
+ActionController::UrlGenerationError - No route matches {:action=>"create", :controller=>"subs", :user_id=>nil}, missing required keys: [:user_id]:
+  app/views/subs/new.html.erb:3:in `_app_views_subs_new_html_erb__1228503141521145255_70350477015160'
+  app/controllers/subs_controller.rb:8:in `new'
+
+Started POST "/__better_errors/acb625d013b318a3/variables" for ::1 at 2021-10-15 16:52:56 -0700
+Started GET "/users" for ::1 at 2021-10-15 16:56:11 -0700
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+actionpack (5.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.6) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/session/new" for ::1 at 2021-10-15 16:56:14 -0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (0.5ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+Completed 200 OK in 19ms (Views: 18.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/session/new" for ::1 at 2021-10-15 16:56:19 -0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (0.7ms)
+  [1m[36mUser Load (3.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+Completed 200 OK in 33ms (Views: 28.8ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/subs/new" for ::1 at 2021-10-15 16:56:20 -0700
+Processing by SubsController#new as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+  Rendering subs/new.html.erb within layouts/application
+  Rendered subs/new.html.erb within layouts/application (4.3ms)
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 0.8ms)
+
+
+
+ActionController::UrlGenerationError - No route matches {:action=>"create", :controller=>"subs", :user_id=>nil}, missing required keys: [:user_id]:
+  app/views/subs/new.html.erb:3:in `_app_views_subs_new_html_erb__1228503141521145255_70350865852360'
+  app/controllers/subs_controller.rb:8:in `new'
+
+Started POST "/__better_errors/0dafec4673c42417/variables" for ::1 at 2021-10-15 16:56:20 -0700
+Started GET "/session/new" for ::1 at 2021-10-15 16:56:22 -0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (0.8ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+Completed 200 OK in 17ms (Views: 15.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/subs/new" for ::1 at 2021-10-15 16:56:49 -0700
+Processing by SubsController#new as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+  Rendering subs/new.html.erb within layouts/application
+  Rendered subs/new.html.erb within layouts/application (5.6ms)
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.6ms)
+
+
+
+ActionController::UrlGenerationError - No route matches {:action=>"create", :controller=>"subs", :user_id=>nil}, missing required keys: [:user_id]:
+  app/views/subs/new.html.erb:3:in `_app_views_subs_new_html_erb__1228503141521145255_70350865593720'
+  app/controllers/subs_controller.rb:8:in `new'
+
+Started POST "/__better_errors/b8933b11f3b2ae4b/variables" for ::1 at 2021-10-15 16:56:49 -0700
+Started POST "/__better_errors/b8933b11f3b2ae4b/variables" for ::1 at 2021-10-15 16:57:02 -0700
+Started GET "/session/new" for ::1 at 2021-10-15 16:58:32 -0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (0.6ms)
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+Completed 200 OK in 31ms (Views: 27.7ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/subs/new" for ::1 at 2021-10-15 16:58:33 -0700
+Processing by SubsController#new as HTML
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+  Rendering subs/new.html.erb within layouts/application
+  Rendered subs/new.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 25ms (Views: 21.6ms | ActiveRecord: 1.7ms)
+
+
+Started POST "/users/1/subs" for ::1 at 2021-10-15 16:59:03 -0700
+Processing by SubsController#create as HTML
+  Parameters: {"authenticity_token"=>"BOaF7C6YvqmYvhrQhIsK17XpWh1BYTdFRBgSzdEdQicIm1bDx2gslZNOH7dG5u1TROz2K2e3cUyOF//ACJlAqg==", "sub"=>{"title"=>"beepboop", "description"=>"i hate humans"}, "user_id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/subs_controller.rb:14
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/subs_controller.rb:14
+  [1m[36mSub Create (3.8ms)[0m  [1m[32mINSERT INTO "subs" ("title", "description", "moderator_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "beepboop"], ["description", "i hate humans"], ["moderator_id", 1], ["created_at", "2021-10-15 23:59:03.030380"], ["updated_at", "2021-10-15 23:59:03.030380"]]
+  ↳ app/controllers/subs_controller.rb:14
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/subs_controller.rb:14
+Redirected to http://localhost:3000/subs/1
+Completed 302 Found in 20ms (ActiveRecord: 5.5ms)
+
+
+Started GET "/subs/1" for ::1 at 2021-10-15 16:59:03 -0700
+Processing by SubsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSub Load (0.6ms)[0m  [1m[34mSELECT  "subs".* FROM "subs" WHERE "subs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/subs_controller.rb:28
+  Rendering subs/show.html.erb within layouts/application
+  Rendered subs/show.html.erb within layouts/application (0.8ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+Completed 200 OK in 33ms (Views: 27.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/subs" for ::1 at 2021-10-15 16:59:10 -0700
+Processing by SubsController#index as HTML
+  Rendering subs/index.html.erb within layouts/application
+  [1m[36mSub Load (4.5ms)[0m  [1m[34mSELECT "subs".* FROM "subs"[0m
+  ↳ app/views/subs/index.html.erb:4
+  Rendered subs/index.html.erb within layouts/application (6.0ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "RruKTIu2pxEJcxrlAiL2_Q"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7
+Completed 200 OK in 33ms (Views: 27.4ms | ActiveRecord: 5.0ms)
+
+
