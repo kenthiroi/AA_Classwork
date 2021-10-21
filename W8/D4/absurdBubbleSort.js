@@ -9,15 +9,18 @@ const reader = readline.createInterface({
 function askIfGreaterThan(el1, el2, callback) {
   // Prompt user to tell us whether el1 > el2; pass true back to the
   // callback if true; else false.
+ 
   reader.question(`${el1} less than ${el2}?: `, answer => {
     let bool;
-    if (answer === 'yes') {
-      bool = true;
+    if (answer === 'n') {
+      callback(true);
+    } else if (answer === 'y') {
+      callback(false);
     } else {
-      bool = false;
+      console.log("ur stooopid")
+      askIfGreaterThan(el1, el2, callback)
     }
-    callback(bool);
-    reader.close();
+    // reader.close();
   })
 }
 
@@ -35,7 +38,14 @@ function innerBubbleSortLoop(arr, i, madeAnySwaps, outerBubbleSortLoop) {
   //    next call, and possibly switch madeAnySwaps if you did swap.
   else {
     askIfGreaterThan(arr[i], arr[i + 1], (bool) => {
-      innerBubbleSortLoop(arr, i++, bool, outerBubbleSortLoop);
+      if (bool) {
+        let temp = arr[i];
+        arr[i] = arr[i+1];
+        arr[i+1] = temp;
+      }
+      i += 1;
+      madeAnySwaps = madeAnySwaps || bool;
+      innerBubbleSortLoop(arr, i, madeAnySwaps, outerBubbleSortLoop);
     });
   }
 }
@@ -44,12 +54,17 @@ function innerBubbleSortLoop(arr, i, madeAnySwaps, outerBubbleSortLoop) {
 // Once you're done testing outerBubbleSortLoop, write absurdBubbleSort.
 
 function absurdBubbleSort(arr, sortCompletionCallback) {
+  // Kick the first outer loop off, starting `madeAnySwaps` as true.
   function outerBubbleSortLoop(madeAnySwaps) {
     // Begin an inner loop if you made any swaps. Otherwise, call
     // `sortCompletionCallback`.
+    if (madeAnySwaps) {
+      innerBubbleSortLoop(arr, 0, false, outerBubbleSortLoop);
+    } else {
+      sortCompletionCallback(arr);
+    }
   }
-
-  // Kick the first outer loop off, starting `madeAnySwaps` as true.
+  outerBubbleSortLoop(true);
 }
 
 absurdBubbleSort([3, 2, 1], function(arr) {
@@ -58,3 +73,9 @@ absurdBubbleSort([3, 2, 1], function(arr) {
 });
 
 // askIfGreaterThan(1, 2, red => console.log(red));
+
+// const arr=[1,2,4,5,3];
+// innerBubbleSortLoop(arr, 0, false, (bool)=>{
+//   console.log(bool);
+//   reader.close();
+// });
