@@ -55,6 +55,7 @@ class Clock {
       }
     }
     // 2. Call printTime.
+    // Clock.prototype.printTime();
     this.printTime();
   }
 }
