@@ -93,7 +93,7 @@ Function.prototype.curry = function(numArgs) {
   function _curry(num) {
     numbers.push(num);
     if (numbers.length === numArgs) {
-      return f.apply(numbers);
+      return f(...numbers);
     } else {
       return _curry;
     }
@@ -102,14 +102,15 @@ Function.prototype.curry = function(numArgs) {
   return _curry;
 }
 
-const newF = function(args) {
+const newF = function(...args) {
   let sum = 0;
-  console.log(args);
   for (let i = 0; i < args.length; i++){
     sum += args[i];
   }
+  console.log(sum);
   return sum;
 }
 
 const newFCurried = newF.curry(4);
-console.log(newFCurried(5)(30)(20)(1));
+newFCurried(5)(30)(20)(1);
+
