@@ -82,5 +82,34 @@ function curriedSum(numArgs) {
   
 }
 
-const newSum = curriedSum(4);
-newSum(5)(30)(20)(1); // => 56
+// const newSum = curriedSum(4);
+// newSum(5)(30)(20)(1); // => 56
+
+
+Function.prototype.curry = function(numArgs) {
+  // console.log("test");
+  let numbers = [];
+  let f = this;
+  function _curry(num) {
+    numbers.push(num);
+    if (numbers.length === numArgs) {
+      return f.apply(numbers);
+    } else {
+      return _curry;
+    }
+  }
+
+  return _curry;
+}
+
+const newF = function(args) {
+  let sum = 0;
+  console.log(args);
+  for (let i = 0; i < args.length; i++){
+    sum += args[i];
+  }
+  return sum;
+}
+
+const newFCurried = newF.curry(4);
+console.log(newFCurried(5)(30)(20)(1));
