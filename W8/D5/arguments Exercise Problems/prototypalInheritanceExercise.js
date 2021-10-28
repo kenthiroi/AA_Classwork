@@ -24,3 +24,4 @@ let cheeseBall = new Asteroid;
 console.log(enterprise);
 enterprise.move();
 cheeseBall.move();
+
