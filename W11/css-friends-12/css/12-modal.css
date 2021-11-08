@@ -1,0 +1,54 @@
+/* PHASE 12: Modal */
+.modal-screen {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-form {
+  position: absolute;
+  width: calc(300px + 3vw);
+  background-color: white;
+  z-index: 2;
+  top: 30vh;
+  left: 35vw;
+  border: solid 1px black;
+  border-radius: 2%;
+  padding: 15px;
+}
+
+.modal-form label {
+  padding-top: 20px;
+}
+
+.modal-form h1{
+  font-size: 36px;
+  font-weight: 300;
+}
+
+#close-btn {
+  float: right;
+  /* color: red; */
+  font-size: 40px;
+  cursor: pointer;
+}
+
+#sign-in-button {
+  font-weight: bold;
+  color: white;
+  background-color: rgb(64, 171, 64);
+  width: 50px;
+}
+
+
+.js-modal-open {
+  display: block;
+}
+
+.js-modal-close {
+  display: none;
+}
